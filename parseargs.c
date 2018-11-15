@@ -11,6 +11,7 @@ char ** parse_args( char * line ) {
   int i;
   for (i = 0; p; i++ ) {
     cmds[i] = strsep( &p, " " );
+    printf("[%s]\n", cmds[i]);
   }
   cmds[i] = NULL;
   return cmds;
@@ -20,11 +21,7 @@ int main(){
   char line[100] = "ls -l --all -color";
   char *s1 = line;
   char ** args = parse_args( s1 );
-  int i = 0;
-  while (args[i]){
-    printf("[%s]\n", args[i]);
-    i++;
-  }
-  execvp(args[0], args);
+  execl("/bin/ls",args[0],NULL);
+  // execvp("/bin/ls", args);
   free(args);
 }
