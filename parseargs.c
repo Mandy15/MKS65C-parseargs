@@ -6,7 +6,7 @@
 
 // test "ls -l --all -color"
 char ** parse_args( char * line ) {
-  char ** cmds = (char **) malloc(8 * sizeof(char *));
+  char ** cmds = (char **) malloc(10 * sizeof(char *));
   char * p = line;
   int i;
   for (i = 0; p; i++ ) {
@@ -18,10 +18,10 @@ char ** parse_args( char * line ) {
 }
 
 int main(){
-  char line[100] = "ls -l --all -color";
+  char line[100] = "ls -l --all --color";
   char *s1 = line;
   char ** args = parse_args( s1 );
-  execl("/bin/ls",args[0],NULL);
-  // execvp("/bin/ls", args);
+  //execl("/bin/ls",args[0],NULL);
+  execvp(args[0], args);
   free(args);
 }
